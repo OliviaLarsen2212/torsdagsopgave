@@ -1,38 +1,39 @@
-class Main{
-	
-public static void main(String[] args){
-	
-	Team team1 = new Team("dreamTeam");
-	team1.setRank(1);
-	team1.addPlayer("Messi");
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
-    Team team2 = new Team("champions");
-	team2.setRank(2);
+public class Main{
+    public static void main(String[] args) {
 
-	Team team3 = new Team("warriors");
-	team3.setRank(3);
+    Cafe cafe = new Cafe();
 
-	Team team4 = new Team("allies");
-	team4.setRank(4);
+    cafe.loadMenuData();
 
-	Team team5 = new Team("power");
-	team5.setRank(5);
+    System.out.println(cafe.getCoffeeMenu());
 
-	Team team6 = new Team("bandits");
-	team6.setRank(6);
-
-	System.out.println(team1);
-    System.out.println(team2);
-    System.out.println(team3);
-    System.out.println(team4);
-    System.out.println(team5);
-    System.out.println(team6);
-
-
-
-
+    }
 
 }
 
+class Cafe{
 
+    private ArrayList<String> coffeeMenu = new ArrayList<>();
+
+public void loadMenuData(){
+    try{
+        File file = new File("coffee.txt");
+        Scanner scanner = new Scanner(file);
+        while(scanner.hasNextLine()){
+          coffeeMenu.add(scanner.nextLine());
+        }
+    }   catch (FileNotFoundException e){
+        System.out.println("File not found. Check path and filename");
+    }
+}
+
+public String getCoffeeMenu(){
+    return coffeeMenu;
+}
 }
